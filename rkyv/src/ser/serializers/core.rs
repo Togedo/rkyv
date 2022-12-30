@@ -126,6 +126,11 @@ impl<T: AsMut<[u8]>> Serializer for BufferSerializer<T> {
         self.pos
     }
 
+    #[inline]
+    unsafe fn set_pos(&mut self, pos: usize) {
+        self.pos = pos;
+    }
+
     fn write(&mut self, bytes: &[u8]) -> Result<(), Self::Error> {
         let end_pos = self.pos + bytes.len();
         let archive_len = self.inner.as_mut().len();

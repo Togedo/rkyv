@@ -61,6 +61,11 @@ impl<A: Borrow<AlignedVec> + BorrowMut<AlignedVec>> Serializer for AlignedSerial
     }
 
     #[inline]
+    unsafe fn set_pos(&mut self, pos: usize) {
+        self.inner.borrow_mut().set_len(pos);
+    }
+
+    #[inline]
     fn write(&mut self, bytes: &[u8]) -> Result<(), Self::Error> {
         self.inner.borrow_mut().extend_from_slice(bytes);
         Ok(())

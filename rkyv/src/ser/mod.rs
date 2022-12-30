@@ -17,6 +17,9 @@ pub trait Serializer: Fallible {
     /// Returns the current position of the serializer.
     fn pos(&self) -> usize;
 
+    /// Unsafely sets the current position of the serializer.
+    unsafe fn set_pos(&mut self, pos: usize);
+
     /// Attempts to write the given bytes to the serializer.
     fn write(&mut self, bytes: &[u8]) -> Result<(), Self::Error>;
 

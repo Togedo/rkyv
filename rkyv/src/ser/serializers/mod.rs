@@ -125,6 +125,11 @@ impl<S: Serializer, C: Fallible, H: Fallible> Serializer for CompositeSerializer
     }
 
     #[inline]
+    unsafe fn set_pos(&mut self, pos: usize) {
+        self.serializer.set_pos(pos);
+    }
+
+    #[inline]
     fn write(&mut self, bytes: &[u8]) -> Result<(), Self::Error> {
         self.serializer
             .write(bytes)

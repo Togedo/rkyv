@@ -53,6 +53,11 @@ impl<W: io::Write> Serializer for WriteSerializer<W> {
     }
 
     #[inline]
+    unsafe fn set_pos(&mut self, pos: usize) {
+        self.pos = pos;
+    }
+
+    #[inline]
     fn write(&mut self, bytes: &[u8]) -> Result<(), Self::Error> {
         self.inner.write_all(bytes)?;
         self.pos += bytes.len();
